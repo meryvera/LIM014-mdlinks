@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-new */
 /* eslint-disable no-console */
 /* eslint-disable max-len */
 // Básicamente le dice al sistema que esto no es un script de shell y que debe usar un intérprete diferente.
@@ -14,33 +16,56 @@ const {
   pathExtensionM,
   // readFileM,
   recursividadM,
-  extractLinksM,
+  extractLinksArrayM,
+  validateStatusM,
 
 } = require('./md-links');
 
 const mdLinks = (filepath, options) => {
   const absolutePath = convertToAbsolutePathM(filepath);
-  const existsPath = pathExistsM(filepath);
+  const existsPath = pathExistsM(absolutePath); // booleano
 
-  const absoluteExists = (existsPath) ? absolutePath : 'La ruta no existe'; // para este error usar trycatch
-  console.log(`La ruta es absoluta y esxite: ${absoluteExists}`);
+  const absoluteExists = (existsPath) ? absolutePath : console.log(chalk.red('✖ La ruta no existe')); // para este error usar trycatch
+  console.log('La ruta es absoluta y esxite L27 ', chalk.green(absoluteExists));
 
-  const isDirectory = isDirectoryM(absolutePath);
-  console.log('es directorio linea 26 ', isDirectory); // true
-
+  const isDirectory = isDirectoryM(absoluteExists) ? isDirectoryM(absoluteExists) : console.log(chalk.yellow('No es directorio')); // isDirectory -> booleano
+  // console.log('es directorio linea 32 ', chalk.green(isDirectory)); // Retorna la ruta absoluta y existente del DIRECTORIO
+  const pathExtension = pathExtensionM(absoluteExists);
+  // console.log('linea 34 ', pathExtension); // .md
   let arrayMarkdownsM = [];
-  if (isDirectory) {
-    arrayMarkdownsM = recursividadM(absolutePath);
-    console.log('linea 34 ', arrayMarkdownsM); // [ 'README3.md', 'README4.md' ]
+  if (isDirectory) { // esto es true
+    arrayMarkdownsM = recursividadM(absoluteExists); // esta recursividad me retorna 1 array de archivos md en string
+    console.log('linea 38 ', arrayMarkdownsM); // array de .md absolutos -> [ 'README3.md', 'README4.md' ]
   } else {
-    const pathExtension = pathExtensionM(filepath);
-    const extractLinks = (pathExtension === '.md') ? (chalk.cyan(extractLinksM(filepath))) : (chalk.red('No es markdown'));
-    console.log('linea 41 ', extractLinks);
+    arrayMarkdownsM = (pathExtension === '.md') ? [absoluteExists] : (chalk.red('No es markdown, ni directorio'));
+    // console.log('linea 41 ', arrayMarkdownsM); // retorna array de .md absoluto -> [ 'README1.md']
   }
-  console.log('linea 40 ', arrayMarkdownsM);
-  // arrayMarkdownsM.map((mdFile) => {
-  //   console.log('linea 42 ', mdFile);
-  //   console.log('linea 43', extractLinksM(mdFile));
-  // });
+  if (options === '' || options.validate === false) {
+    const arrayDeObjetosLinks = extractLinksArrayM(arrayMarkdownsM);// se extrae 1 array de objetos x cada link
+    console.log('linea 45 ', arrayDeObjetosLinks);
+    return arrayDeObjetosLinks;
+  }
+  console.log('Lleva options, true');
+  const arrayDeObjetosLinks = extractLinksArrayM(arrayMarkdownsM);
+  // console.log('linea 45 ', arrayDeObjetosLinks);
+
+  const promiseObjectArray = [];
+  arrayDeObjetosLinks.forEach((objeto) => {
+    promiseObjectArray.push(validateStatusM(objeto));
+  });
+  const arrayDeObjetosLinksStatus = Promise.all(promiseObjectArray).then((result) => console.log(result)); // SIEMPRE DEBE IR CON CONSOLE.LOG???
+  return arrayDeObjetosLinksStatus;
 };
-mdLinks('./src/dir/dir2', '');
+// OPCIONES A TESTEAR:
+// mdLinks('./PruebasLinks', ''); // 5 archivos .md
+// mdLinks('./PruebasLinks', { validate: true }); // 5 archivos .md
+// mdLinks('./PruebasLinks', { validate: false }); // 5 archivos .md
+// mdLinks('./PruebasLinks/dir/dir2', '');
+// mdLinks('./PruebasLinks/dir/dir2', { validate: true });
+// mdLinks('./PruebasLinks/dir/dir2', { validate: false });
+// mdLinks('./PruebasLinks/dir/README2.md', '');
+// mdLinks('./PruebasLinks/dir/README2.md', { validate: true });
+// mdLinks('./PruebasLinks/dir/README2.md', { validate: false });
+// mdLinks('./README1.md', '');
+// mdLinks('./README1.md', { validate: true });
+// mdLinks('./README1.md', { validate: false });
