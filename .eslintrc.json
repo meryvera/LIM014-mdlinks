@@ -1,0 +1,20 @@
+/* este archivo se creó cuando en  npx eslint --init escoji como formato de configuracion del eslint al JSON */
+/* acá habilito los entornos de ejecucion con true */
+/* Un entorno proporciona variables globales predefinidas */
+/* Estos entornos no son mutuamente excluyentes, por lo que puede definir más de uno a la vez. */
+{
+    "env": {
+        "commonjs": true,
+        "es2021": true,
+        "node": true,
+        "jest": true //le digo aceptame los comandos de test o la kw de test.
+    },
+    "extends": [
+        "airbnb-base"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12
+    },
+    "rules": {
+    }
+}

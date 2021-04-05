@@ -1,4 +1,4 @@
  > #### `[options]` 
  > Puede adoptar los siguientes valores:
-* [ ] [Linkify.](https://github.com/markdown-it/linkify-it)
-* [ ] [Linkify2.](https://markdown-it.github.io/linkify-it/)
+* [ ] [Consumo de Promesas.3. Este es un link de más de 50 caracteres](https://scotch.io/tutorials/javascript-promises-for-dummies#toc-consuming-promises)
+* [ ] [Creación de Promesas.3.2 Este es un link de más de 50 caracteres](https://www.freecodecamp.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/)

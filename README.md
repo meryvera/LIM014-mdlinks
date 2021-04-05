@@ -1,6 +1,6 @@
 [Fuente Laboratoria](https://github.com/meryvera/LIM014-mdlinks/blob/main/READMELAB.md)
 
-![ExtLink](https://github.com/meryvera/LIM014-mdlinks/blob/main/src/img/ExtLink.png)
+![ExtLink](https://github.com/meryvera/LIM014-mdlinks/blob/main/PruebasLinks/img/ExtLink.png)
 
 ***
 ## Índice
@@ -26,7 +26,7 @@ mdLinks <path-to-file> [options]
 ### Using CLI (Command Line Interface)
 
 ```sh
-$ npm install --save md-links-meryvera
+$ npm install --save md-links-mv
 ```
 
 > IMPORTANTE. En la interfaz, `<path-to-file>` es la ruta de tu archivo Markdown y donde:
@@ -48,8 +48,8 @@ mdLinks(path, options)
 ### Using Import
 
 ```sh
-import mdLinks from 'md-links-meryvera';
-let mdLinks = require('md-links-meryvera');
+import mdLinks from 'md-links-mv';
+let mdLinks = require('md-links-mv');
 ```
 
 > IMPORTANTE. En la interfaz, `path` es la ruta de tu archivo Markdown y donde:
