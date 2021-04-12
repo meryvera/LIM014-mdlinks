@@ -11,9 +11,7 @@ const {
   convertToAbsolutePathM,
   pathExistsM,
   isDirectoryM,
-  // readDirectoryM,
   pathExtensionM,
-  // readFileM,
   recursividadM,
   extractLinksArrayM,
   validateStatusM,
@@ -31,29 +29,22 @@ const mdLinks = (filepath, options) => new Promise((resolve, reject) => {
     ? isDirectoryM(absoluteExists)
     : console.log(chalk.magenta('Analizando file ingresado:')); // isDirectory -> booleano
     // console.log('es directorio linea 32 ', chalk.green(isDirectory)); // Retorna la ruta absoluta y existente del DIRECTORIO
-  const pathExtension = pathExtensionM(absoluteExists);
-  // console.log('linea 34 ', pathExtension); // .md
+  const pathExtension = pathExtensionM(absoluteExists);// console.log('linea 34 ', pathExtension); // .md
+
   let arrayMarkdownsM = [];
   if (isDirectory) {
-    // esto es true
     arrayMarkdownsM = recursividadM(absoluteExists); // esta recursividad me retorna 1 array de archivos md en string
-    // console.log('linea 38 ', arrayMarkdownsM); // array de .md absolutos -> [ 'README3.md', 'README4.md' ]
   } else {
     arrayMarkdownsM = pathExtension === '.md'
       ? [absoluteExists]
       : chalk.red('No es markdown, ni directorio');
-    // console.log('linea 41 ', arrayMarkdownsM); // retorna array de .md absoluto -> [ 'README1.md']
   }
 
   if (!options || options.validate === false || options === '') {
     const arrayDeObjetosLinks = extractLinksArrayM(arrayMarkdownsM); // se extrae 1 array de objetos x cada link
-    // console.log('linea 47 ', arrayDeObjetosLinks);
-    // return console.log(arrayDeObjetosLinks); // este retorno no va porqe el consolelog me corta el test
     resolve(arrayDeObjetosLinks); // este test si pasa xqe no tiene console.log este return
   }
-  // console.log('Lleva options, true');
   const arrayDeObjetosLinks = extractLinksArrayM(arrayMarkdownsM);
-  // console.log('linea 53 ', arrayDeObjetosLinks);
 
   const promiseObjectArray = [];// aca ahora se guarda array de objetos + status
   arrayDeObjetosLinks.forEach((objeto) => {
@@ -62,10 +53,11 @@ const mdLinks = (filepath, options) => new Promise((resolve, reject) => {
   // console.log('linea 62', promiseObjectArray); // Promise {<pending>}, --> 1 x cada link
   const promiseArrayDeObjetosLinksStatus = Promise.all(promiseObjectArray).then(
     (result) => result,
-  ); // SIEMPRE DEBE IR CON CONSOLE.LOG???
+  );
   resolve(promiseArrayDeObjetosLinksStatus);
 });
 
+module.exports = mdLinks;
 // OPCIONES DE MIS PARAMETROS:
 // mdLinks('./PruebasLinks', '').then((res) => console.log(res))
 //   .catch(console.error); // Milu
@@ -125,5 +117,3 @@ const mdLinks = (filepath, options) => new Promise((resolve, reject) => {
 // mdLinks('./RUTANOEXISTE.md', { validate: true }).then((res) => console.log(res))
 // // .catch((err) => console.error(err)); // Mai
 //   .catch(console.error); // Milu
-
-module.exports = mdLinks;

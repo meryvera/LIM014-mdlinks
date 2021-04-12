@@ -11,6 +11,7 @@
   },
   "scripts": {
     "test": "jest --verbose --coverage",
+    "pretest": "npm run eslint",
     "eslint": "eslint --ext .js PruebasLinks/ test/"
   },
   "repository": {

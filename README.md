@@ -62,5 +62,5 @@ Licencia [MIT](https://opensource.org/licenses/MIT) ©️ 2021
 
 ## 6. Action Plan
 [Project mdlinks](https://github.com/meryvera/LIM014-mdlinks/projects/2)
-[Flowchart - API](https://github.com/meryvera/LIM014-mdlinks/blob/main/FLOWCHART-API.md)
-[Flowchart - CLI](https://github.com/meryvera/LIM014-mdlinks/blob/main/FLOWCHART-CLI.md)
+[Flowchart - API](https://drive.google.com/file/d/1SKuCDFVMw1vOuzCf1TvLZ_FfoCxJhl-_/view?usp=sharing)
+[Flowchart - CLI](https://drive.google.com/file/d/1BfEjCkfMvtAorM_hMQmIFfSw2C153rn8/view?usp=sharing)

@@ -10,7 +10,6 @@ const {
   pathExistsM,
   isDirectoryM,
   pathExtensionM,
-  // readFileM,
   readDirectoryM,
   recursividadM,
   extractLinksArrayM,

@@ -1,18 +1,13 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 /* eslint-disable max-len */
 const chalk = require('chalk');
 const mdlinks = require('./index');
 
 const argumentos = (process.argv);
 
-// console.log('linea 6 ', process.argv);
-// console.log('linea 6 ', (process.argv).length);
-
 const newPath = argumentos[2];
-// console.log('linea16 ', newPath);
-// const option = argumentos[4];
-// const option2 = argumentos[5]; // --validate
-// console.log('linea16 ', option2);
+
 if (newPath && !argumentos[3]) {
   mdlinks(newPath).then((res) => res.forEach((object) => console.log(chalk.green(newPath), chalk.cyan(object.href), chalk.blue(object.text))))
     .catch(console.error);
@@ -64,21 +59,3 @@ if (newPath && !argumentos[3]) {
   })
     .catch(console.error);
 }
-
-// mdlinks(argumentos[3], { validate: true }).then((res) => console.log(res))
-//   .catch((error) => error);
-// console.log(argumentos[3]);
-
-// mdlinks(argumentos[3], '').then((res) => console.log(res))
-//   .catch((error) => error);
-// console.log(argumentos[3]);
-
-// apiJs(argumentos[3]).then((res) => console.log(res))
-//   .catch((error) => error);
-// console.log(argumentos[3]);
-
-// if (argumentos.includes('--stats')) {
-//   apiJs(argumentos[3]).then((res) => console.log(res))
-//     .catch((error) => error);
-//   // console.log(argumentos[3]);
-// }

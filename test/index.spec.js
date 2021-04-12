@@ -73,51 +73,51 @@ const objectsArrayPerLinkDir = [
     file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\README2.md',
   },
 ];
-const objectsArrayStatusDir = [
-  {
-    href: 'https://scotch.io/tutorials/javascript-promises-for-dummies#toc-consuming-promises',       
-    text: 'Consumo de Promesas.3 Este es un link de más de 50',
-    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\dir2\\README3.md',
-    Status: 200,
-    StatusMessage: 'OK',
-  },
-  {
-    href: 'https://www.freecodecamp.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/',        
-    text: 'Creación de Promesas.3.2',
-    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\dir2\\README3.md',
-    Status: 200,
-    StatusMessage: 'OK',
-  },
-  {
-    href: 'https://github.com/markdown-it/linkify-it',
-    text: 'Linkify4.',
-    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\dir2\\README4.md',
-    Status: 200,
-    StatusMessage: 'OK',
-  },
-  {
-    href: 'https://markdown-it.github.io/linkify-it/',
-    text: 'Linkify4.2.',
-    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\dir2\\README4.md',
-    Status: 200,
-    StatusMessage: 'OK',
-  },
-  {
-    href: 'https://kinsta.com/es/blog/codigos-de-estado-de-http/',
-    text: 'Estados',
-    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\README2.md',
-    Status: 200,
-    StatusMessage: 'OK',
-  },
-];
+// const objectsArrayStatusDir = [
+//   {
+//     href: 'https://scotch.io/tutorials/javascript-promises-for-dummies#toc-consuming-promises',
+//     text: 'Consumo de Promesas.3 Este es un link de más de 50',
+//     file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\dir2\\README3.md',
+//     Status: 200,
+//     StatusMessage: 'OK',
+//   },
+//   {
+//     href: 'https://www.freecodecamp.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/',
+//     text: 'Creación de Promesas.3.2',
+//     file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\dir2\\README3.md',
+//     Status: 200,
+//     StatusMessage: 'OK',
+//   },
+//   {
+//     href: 'https://github.com/markdown-it/linkify-it',
+//     text: 'Linkify4.',
+//     file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\dir2\\README4.md',
+//     Status: 200,
+//     StatusMessage: 'OK',
+//   },
+//   {
+//     href: 'https://markdown-it.github.io/linkify-it/',
+//     text: 'Linkify4.2.',
+//     file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\dir2\\README4.md',
+//     Status: 200,
+//     StatusMessage: 'OK',
+//   },
+//   {
+//     href: 'https://kinsta.com/es/blog/codigos-de-estado-de-http/',
+//     text: 'Estados',
+//     file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\README2.md',
+//     Status: 200,
+//     StatusMessage: 'OK',
+//   },
+// ];
 
-const objectsArrayPerLink404 = [
-  {
-    href: 'https://github.com/404',
-    text: 'Link 404',
-    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dirFail\\README404.md',
-  },
-];
+// const objectsArrayPerLink404 = [
+//   {
+//     href: 'https://github.com/404',
+//     text: 'Link 404',
+//     file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dirFail\\README404.md',
+//   },
+// ];
 const objectsArrayStatus404 = [
   {
     href: 'https://github.com/404',
@@ -128,13 +128,13 @@ const objectsArrayStatus404 = [
   },
 ];
 
-const objectsArrayPerLinkError = [
-  {
-    href: 'https://www.freecode.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/',
-    text: 'Link ERROR',
-    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dirFail\\READMERR.md',
-  },
-];
+// const objectsArrayPerLinkError = [
+//   {
+//     href: 'https://www.freecode.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/',
+//     text: 'Link ERROR',
+//     file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dirFail\\READMERR.md',
+//   },
+// ];
 const objectsArrayStatusError = [
   {
     href: 'https://www.freecode.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/',

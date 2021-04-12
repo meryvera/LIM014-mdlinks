@@ -7,8 +7,6 @@ const path = require('path'); // este modulo a traves de sus metodos nos permite
 const fs = require('fs'); // este modulo  a través de sus metodos nos permite trabajar los archivos del sistema opertaivo, este modulo es muy importante para cuando queramos crear modulos
 const chalk = require('chalk');
 const axios = require('axios');
-// const markdownIt = require('markdown-it');
-// const linkify = require('linkify-it')();// este modulo es para analizar el md y extraer links contenidos
 
 // SE CONVIERTE A RUTA ABSOLUTA
 const convertToAbsolutePathM = (filepath) => {
@@ -39,18 +37,6 @@ const isDirectoryM = (dir) => {
 // SI ES FILE SE COMPRUEBA SI ES MARKDOWN
 const pathExtensionM = (filepath4) => path.extname(filepath4); // .md
 // pathExtensionM('./README.md');
-
-// IDENTIFICAMOS A LOS ARCHIVOS QUE SON MD
-// const mdPathExtensionM = (filepath6) => {
-// pathExtensionM(filepath6) === '.md' ? filepath6 : 'no es md';
-// mdPathExtensionM('./README.md');
-
-// SE LEE EL ARCHIVO MARKDOWN
-// const readFileM = (filepath5) => {
-//   const dataFile = fs.readFileSync(filepath5, 'utf8');
-//   return dataFile;
-// };
-// readFileM('./README1.md');
 
 // SE LEE EL DIRECTORIO
 const readDirectoryM = (dir) => {
@@ -104,7 +90,6 @@ const extractLinksArrayM = (arrayMarkdownsM) => {
     // console.log("linea 103 ", arrayLinks);
     if (arrayLinks != null) {
       for (let i = 0; i < arrayLinks.length; i++) {
-        // console.log({ href: arrayLinks[i], text: textLinks[i], file: absolute });
         arrayDeObjetosInicial.push({
           href: arrayLinks[i],
           text: textLinks50[i],
@@ -134,9 +119,7 @@ const validateStatusM = (object) => axios.get(object.href)
         Status: response.status,
         StatusMessage: response.statusText,
       };
-      // console.log(chalk.green(`href:${object.href}\nResponse code: ✔ ${response.status}\nResponse: ${response.statusText}\n`));
     }
-    // console.log(chalk.red(`Response code : ✖ ${response.status}\nResponse: ${response.statusText}\n`));
   })
   .catch((error) => {
     if (error.response) {
@@ -188,16 +171,7 @@ module.exports = {
   isDirectoryM,
   readDirectoryM,
   pathExtensionM,
-  // readFileM,
   recursividadM,
   extractLinksArrayM,
   validateStatusM,
 };
-
-// return {
-//   href: object.href,
-//   text: object.text,
-//   file: object.file,
-//   ResponseCode: response.status,
-//   Response: response.statusText,
-// };

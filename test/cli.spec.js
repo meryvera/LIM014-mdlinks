@@ -1,10 +1,10 @@
+/* eslint-disable max-len */
+/* eslint-disable no-console */
 const { spawn } = require('child_process');
 
 const path = require('path');
 
 const chalk = require('chalk');
-
-const argumentos = (process.argv);
 
 const execute = (comand, args = []) => {
   const createProcess = spawn(comand, args, { shell: process.platform === 'win32' });
