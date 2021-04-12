@@ -1,6 +1,10 @@
+/* eslint-disable max-len */
 // const mdLinks = require('../');
 
-const mdLinks = require('..');
+const axios = require('axios');
+
+jest.mock('axios'); // el metodo axios no va a ser testeado realmente de la libreria axios, sino la reemplazo x el mock
+
 const {
   convertToAbsolutePathM,
   pathExistsM,
@@ -11,7 +15,7 @@ const {
   recursividadM,
   extractLinksArrayM,
   validateStatusM,
-} = require('../functions');
+} = require('../src/functions');
 
 const pathTest = {
   relPath: 'README1.md',
@@ -28,6 +32,8 @@ const markdownFilesArray = [
   'PruebasLinks\\dir\\dir2\\README3.md',
   'PruebasLinks\\dir\\dir2\\README4.md',
   'PruebasLinks\\dir\\README2.md',
+  'PruebasLinks\\dirFail\\README404.md',
+  'PruebasLinks\\dirFail\\READMERR.md',
   'PruebasLinks\\img\\FLOWCHART-API.md',
   'PruebasLinks\\img\\FLOWCHART-CLI.md',
 ];
@@ -58,6 +64,16 @@ const arrayObjectsPerLink = [
     file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\README2.md',
   },
   {
+    href: 'https://github.com/404',
+    text: 'Link 404',
+    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dirFail\\README404.md',
+  },
+  {
+    href: 'https://www.freecode.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/',
+    text: 'Link ERROR',
+    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dirFail\\READMERR.md',
+  },
+  {
     href: 'https://app.diagrams.net/#G1SKuCDFVMw1vOuzCf1TvLZ_FfoCxJhl-_',
     text: 'ExtLink',
     file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\img\\FLOWCHART-API.md',
@@ -68,41 +84,44 @@ const arrayObjectsPerLink = [
     file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\img\\FLOWCHART-CLI.md',
   },
 ];
+
 const objectLink200 = {
-  href: 'https://www.freecodecamp.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/',
-  text: 'Creación de Promesas.3.2',
-  file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\README1.md',
+  href: 'https://kinsta.com/es/blog/codigos-de-estado-de-http/',
+  text: 'Estados',
+  file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\README2.md',
 };
+const objectLinkStatus200 = {
+  href: 'https://kinsta.com/es/blog/codigos-de-estado-de-http/',
+  text: 'Estados',
+  file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\README2.md',
+  Status: 200,
+  StatusMessage: 'OK',
+};
+
 const objectLink404 = {
   href: 'https://github.com/404',
   text: 'Link 404',
-  file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\README404.md',
-};
-const objectBrokenLink = {
-  href: 'https://www.freecode.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/',
-  text: 'Link ERROR',
-  file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\READMERR.md',
-};
-const objectLinkStatus200 = {
-  href: 'https://www.freecodecamp.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/',
-  text: 'Creación de Promesas.3.2',
-  file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\README1.md',
-  Status: 200,
-  StatusMessage: 'OK',
+  file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dirFail\\README404.md',
 };
 const objectLinkStatus404 = {
   href: 'https://github.com/404',
   text: 'Link 404',
-  file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\README404.md',
-  ResponseCode: 404,
-  Response: 'FAIL',
+  file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dirFail\\README404.md',
+  Status: 404,
+  StatusMessage: 'FAIL',
+};
+
+const objectBrokenLink = {
+  href: 'https://www.freecode.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/',
+  text: 'Link ERROR',
+  file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dirFail\\READMERR.md',
 };
 const objectBrokenLinkStatus = {
   href: 'https://www.freecode.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/',
   text: 'Link ERROR',
-  file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\READMERR.md',
-  ResponseCode: 'ERROR',
-  Response: 'FAIL',
+  file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dirFail\\READMERR.md',
+  Status: 'ERROR LINK',
+  StatusMessage: 'FAIL',
 };
 
 // TEST PARA CONVERTIR A RUTA ABSOLUTA
@@ -191,24 +210,30 @@ describe('Checking for markdown files inside directories', () => {
 });
 
 // TEST PARA EVALUAR ESTADOS DE CADA LINK
-test('Should return an object with status 200', () => validateStatusM(objectLink200).then((data) => {
-  expect(data).toEqual(objectLinkStatus200);
-}));
-// test('Should return 1 object with status different to 200', () => validateStatusM(objectLink404).catch((fail) => {
-//   expect(fail).toEqual(objectLinkStatus404);
-// }));
-// test('Should return 1 object with status of a broken link', () => validateStatusM(objectBrokenLink).catch((error) => {
-//   expect(error).toEqual(objectBrokenLinkStatus);
-// }));
-// test('the fetch fails with an error', () => {
-//   expect.assertions(1);
-//   return fetchData().catch(e => expect(e).toMatch('error'));
-// });
+test('Should return an object with status 200', () => {
+  axios.get.mockImplementation(() => Promise.resolve({
+    status: 200,
+    statusText: 'OK',
+  }));
+  expect(validateStatusM(objectLink200)).resolves.toEqual(objectLinkStatus200);
+});
+test('Should return an object with status 404', () => {
+  // eslint-disable-next-line prefer-promise-reject-errors
+  axios.get.mockImplementation(() => Promise.reject({
+    response: {
+      status: 404,
+      statusText: 'FAIL',
+    },
+  }));
+  return validateStatusM(objectLink404).then((data) => {
+    expect(data).toEqual(objectLinkStatus404);
+  });
+});
 
-// describe('mdLinks', () => {
-
-//   it('should...', () => {
-//     console.log('FIX ME!');
-//   });
-
-// });
+test('Should return an object with broken link', () => {
+  // eslint-disable-next-line prefer-promise-reject-errors
+  axios.get.mockImplementation(() => Promise.reject({})); // este error es vacio
+  return validateStatusM(objectBrokenLink).then((data) => {
+    expect(data).toEqual(objectBrokenLinkStatus);
+  });
+});

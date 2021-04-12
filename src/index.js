@@ -55,42 +55,46 @@ const mdLinks = (filepath, options) => new Promise((resolve, reject) => {
   const arrayDeObjetosLinks = extractLinksArrayM(arrayMarkdownsM);
   // console.log('linea 53 ', arrayDeObjetosLinks);
 
-  const promiseObjectArray = [];
+  const promiseObjectArray = [];// aca ahora se guarda array de objetos + status
   arrayDeObjetosLinks.forEach((objeto) => {
     promiseObjectArray.push(validateStatusM(objeto));
   });
-  const arrayDeObjetosLinksStatus = Promise.all(promiseObjectArray).then(
+  // console.log('linea 62', promiseObjectArray); // Promise {<pending>}, --> 1 x cada link
+  const promiseArrayDeObjetosLinksStatus = Promise.all(promiseObjectArray).then(
     (result) => result,
   ); // SIEMPRE DEBE IR CON CONSOLE.LOG???
-  resolve(arrayDeObjetosLinksStatus);
+  resolve(promiseArrayDeObjetosLinksStatus);
 });
 
 // OPCIONES DE MIS PARAMETROS:
-// mdLinks('./PruebasLinks', '')
-// .catch(console.error); // Milu
-// mdLinks('./PruebasLinks')
-// .catch(console.error); // Milu
-// mdLinks('./PruebasLinks', { validate: true })
-// .catch(console.error); // Milu
-// mdLinks('./PruebasLinks', { validate: false })
-// .catch(console.error); // Milu
-
-// mdLinks('./PruebasLinks/dir/dir2', '')
-// .catch(console.error); // Milu
-// mdLinks('./PruebasLinks/dir/dir2')
-// .catch(console.error); // Milu
-// mdLinks('./PruebasLinks/dir/dir2', { validate: true })
-// .catch(console.error); // Milu
-// mdLinks('./PruebasLinks/dir/dir2', { validate: false })
+// mdLinks('./PruebasLinks', '').then((res) => console.log(res))
+//   .catch(console.error); // Milu
+// mdLinks('./PruebasLinks').then((res) => console.log(res))
+//   .catch(console.error); // Milu
+// mdLinks('./PruebasLinks', { validate: true }).then((res) => console.log(res))
+//   .catch(console.error); // Milu
+// mdLinks('./PruebasLinks', { validate: false }).then((res) => console.log(res))
 // .catch(console.error); // Milu
 
-// mdLinks('./PruebasLinks/dir', '')
+// mdLinks('./PruebasLinks/dir/README2.md', { validate: true }).then((res) => console.log(res))
+//   .catch(console.error); // Milu
+
+// mdLinks('./PruebasLinks/dir/dir2').then((res) => console.log(res))
 // .catch(console.error); // Milu
-// mdLinks('./PruebasLinks/dir')
+// mdLinks('./PruebasLinks/dir/dir2').then((res) => console.log(res))
 // .catch(console.error); // Milu
-// mdLinks('./PruebasLinks/dir', { validate: true })
+// mdLinks('./PruebasLinks/dir/dir2', { validate: true }).then((res) => console.log(res))
+//   .catch(console.error); // Milu
+// mdLinks('./PruebasLinks/dir/dir2', { validate: false }).then((res) => console.log(res))
 // .catch(console.error); // Milu
-// mdLinks('./PruebasLinks/dir', { validate: false })
+
+// mdLinks('./PruebasLinks/dir', '').then((res) => console.log(res))
+//   .catch(console.error); // Milu
+// mdLinks('./PruebasLinks/dir').then((res) => console.log(res))
+// .catch(console.error); // Milu
+// mdLinks('./PruebasLinks/dir', { validate: true }).then((res) => console.log(res))
+//   .catch(console.error); // Milu
+// mdLinks('./PruebasLinks/dir', { validate: false }).then((res) => console.log(res))
 // .catch(console.error); // Milu
 
 // mdLinks('./README1.md', '').then((res) => console.log(res))
@@ -98,28 +102,28 @@ const mdLinks = (filepath, options) => new Promise((resolve, reject) => {
 // mdLinks('./README1.md').then((res) => console.log(res))
 //   .catch(console.error); // Milu
 // mdLinks('./README1.md', { validate: true }).then((res) => console.log(res))
-// .catch(console.error); // Milu
-// mdLinks('./README1.md', { validate: false })
-// .catch(console.error); // Milu
-
-// mdLinks('./README404.md', '')
-// .catch(console.error); // Milu
-// mdLinks('./README404.md', { validate: true }).then((res) => console.log(res))
 //   .catch(console.error); // Milu
-// mdLinks('./README404.md', { validate: false })
+// mdLinks('./README1.md', { validate: false }).then((res) => console.log(res))
 // .catch(console.error); // Milu
 
-// mdLinks('./READMERR.md', '').then((res) => console.log(res))
+// mdLinks('./PruebasLinks/dirFail/README404.md', '').then((res) => console.log(res))
 // .catch(console.error); // Milu
-// mdLinks('./READMERR.md').then((res) => console.log(res))
+// mdLinks('./PruebasLinks/dirFail/README404.md', { validate: true }).then((res) => console.log(res))
+//   .catch(console.error); // Milu
+// mdLinks('./PruebasLinks/dirFail/README404.md', { validate: false }).then((res) => console.log(res))
 // .catch(console.error); // Milu
-// mdLinks('./READMERR.md', { validate: true }).then((res) => console.log(res))
+
+// mdLinks('./PruebasLinks/dirFail/READMERR.md', '').then((res) => console.log(res))
 // .catch(console.error); // Milu
-// mdLinks('./READMERR.md', { validate: false })
+// mdLinks('./PruebasLinks/dirFail/READMERR.md').then((res) => console.log(res))
+// .catch(console.error); // Milu
+// mdLinks('./PruebasLinks/dirFail/READMERR.md', { validate: true }).then((res) => console.log(res))
+//   .catch(console.error); // Milu
+// mdLinks('./PruebasLinks/dirFail/READMERR.md', { validate: false }).then((res) => console.log(res))
 // .catch(console.error); // Milu
 
 // mdLinks('./RUTANOEXISTE.md', { validate: true }).then((res) => console.log(res))
-// .catch((err) => console.error(err)); // Mai
-// .catch(console.error); // Milu
+// // .catch((err) => console.error(err)); // Mai
+//   .catch(console.error); // Milu
 
 module.exports = mdLinks;

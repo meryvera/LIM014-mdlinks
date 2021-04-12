@@ -1,26 +1,29 @@
-#!/usr/bin/env node cli
+#!/usr/bin/env node
+/* eslint-disable max-len */
 const chalk = require('chalk');
 const mdlinks = require('./index');
 
 const argumentos = (process.argv);
 
-console.log('linea 6 ', (process.argv).length);
+// console.log('linea 6 ', process.argv);
+// console.log('linea 6 ', (process.argv).length);
 
-const newPath = argumentos[3];
+const newPath = argumentos[2];
+// console.log('linea16 ', newPath);
 // const option = argumentos[4];
 // const option2 = argumentos[5]; // --validate
 // console.log('linea16 ', option2);
-if (newPath && !argumentos[4]) {
-  mdlinks(newPath).then((res) => console.log(res))
+if (newPath && !argumentos[3]) {
+  mdlinks(newPath).then((res) => res.forEach((object) => console.log(chalk.green(newPath), chalk.cyan(object.href), chalk.blue(object.text))))
     .catch(console.error);
-} else if (argumentos.includes('--validate') && argumentos.length === 5) {
-  mdlinks(argumentos[3], { validate: true }).then((res) => {
+} else if (argumentos.includes('--validate') && argumentos.length === 4) {
+  mdlinks(argumentos[2], { validate: true }).then((res) => {
     // eslint-disable-next-line max-len
-    res.map((object) => console.log(chalk.green(newPath), chalk.cyan(object.href), chalk.magenta(object.StatusMessage), chalk.yellow(object.Status), chalk.blue(object.text)));
+    res.map((object) => console.log(chalk.green(newPath), chalk.cyan(object.href), chalk.yellow(object.StatusMessage), chalk.yellow(object.Status), chalk.blue(object.text)));
   })
     .catch(console.error);
-} else if (argumentos.includes('--stats') && argumentos.length === 5) {
-  mdlinks(argumentos[3], { validate: true }).then((res) => {
+} else if (argumentos.includes('--stats') && argumentos.length === 4) {
+  mdlinks(argumentos[2], { validate: true }).then((res) => {
     // console.log('linea26 ', res); // me retorna promesa de array de objetos con status
     const arrayTotalLinks = [];
     res.forEach((objeto) => arrayTotalLinks.push(objeto.href));
@@ -36,8 +39,8 @@ if (newPath && !argumentos[4]) {
     return console.log(chalk.yellow(`Total links: ${totalLinks}\nUnique links: ${UniqueLinks}`));
   })
     .catch(console.error);
-} else if (argumentos.length === 6 && argumentos.includes('--validate') && argumentos.includes('--stats')) {
-  mdlinks(argumentos[3], { validate: true }).then((res) => { // res da promesa de array de objetos con status
+} else if (argumentos.length === 5 && argumentos.includes('--validate') && argumentos.includes('--stats')) {
+  mdlinks(argumentos[2], { validate: true }).then((res) => { // res da promesa de array de objetos con status
     const arrayTotalLinks = [];
     res.forEach((objeto) => arrayTotalLinks.push(objeto.href));
     const totalLinks = arrayTotalLinks.length;

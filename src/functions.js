@@ -17,7 +17,7 @@ const convertToAbsolutePathM = (filepath) => {
   }
   return path.resolve(filepath);
 };
-// convertToAbsolutePathM('./README1.md');
+// console.log(convertToAbsolutePathM('./README1.md'));
 
 // SE COMPRUEBA LA EXISTENCIA DE LA RUTA
 const pathExistsM = (filepath2) => {
@@ -124,8 +124,7 @@ const extractLinksArrayM = (arrayMarkdownsM) => {
 // ]);
 
 // VALIDAMOS LOS ESTADOS DE LOS LINKS CON AXIOS
-const validateStatusM = (object) => axios
-  .get(object.href)
+const validateStatusM = (object) => axios.get(object.href)
   .then((response) => {
     if (response.status == 200) {
       return {
@@ -141,6 +140,7 @@ const validateStatusM = (object) => axios
   })
   .catch((error) => {
     if (error.response) {
+      // console.log('linea 143 ', error);
       return {
         href: object.href,
         text: object.text,
@@ -160,18 +160,25 @@ const validateStatusM = (object) => axios
     }
   });
 
-// esta funcion retorna 1 OBJETOS POR LINK CON SU STATUS
-// validateStatus('https://www.freecodecamp.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/').then(result => console.log(result));
+// esta funcion retorna 1 OBJETO POR LINK, CON SU STATUS Y ESTATUS MESSAGE
+// validateStatusM('https://www.freecodecamp.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/').then(result => console.log(result));
 // validateStatusM({
-//   href: 'https://www.freecodecamp.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/',
-//   text: 'Creación de Promesas.3.2',
-//   file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\README1.md',
+//   href: 'https://kinsta.com/es/blog/codigos-de-estado-de-http/',
+//   text: 'Estados',
+//   file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\README1.md',
 // }).then((result) => console.log(result));
 
 // validateStatusM({
 //   href: 'https://github.com/404',
 //   text: 'Link 404',
-//   file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\README404.md',
+//   file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dirFail\\README404.md',
+// }).then((result) => console.log(result))
+//   .catch((err) => console.error(err));
+
+// validateStatusM({
+//   href: 'https://www.freecode.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/',
+//   text: 'Link ERROR',
+//   file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dirFail\\READMERR.md',
 // }).then((result) => console.log(result));
 
 // ESTO VA CON EL OTRO

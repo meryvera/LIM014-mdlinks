@@ -1,11 +1,11 @@
+/* eslint-disable max-len */
 // const path = require('path'); // este modulo a traves de sus metodos nos permite manipular las rutas
 // const fs = require('fs'); // este modulo  a través de sus metodos nos permite trabajar los archivos del sistema opertaivo, este modulo es muy importante para cuando queramos crear modulos
 // const marked = require('marked'); // este modulo es para analizar el md y extraer links contenidos
 
 // "pretest": "npm run eslint", ante sdel test evalue todas las lineas de codigo con slint
 
-// FUNCIÓN MDLINKS
-// const mdLinks = (filepath, options) => {
+// FUNCIÓN MDLINKS// const mdLinks = (filepath, options) => {
 //   const absolutePath = convertToAbsolutePathM(filepath);
 //   const existsPath = pathExistsM(absolutePath); // booleano
 
