@@ -1,13 +1,13 @@
 [Fuente Laboratoria](https://github.com/meryvera/LIM014-mdlinks/blob/main/READMELAB.md)
 
-![ExtLink](https://github.com/meryvera/LIM014-mdlinks/blob/main/src/img/ExtLink.png)
+![ExtLink](https://github.com/meryvera/LIM014-mdlinks/blob/main/PruebasLinks/img/ExtLink.png)
 
 ***
 ## Índice
 
 * [1. About ExtLink markdown library](#1-about)
 * [2. Installing](#2-installing)
-* [3. Inicialization](#3-inicialization)
+* [3. Importing](#3-importing)
 * [4. Version](#4-version)
 * [5. Licence](#5-licence)
 * [6. Action Plan](#6-action-plan)
@@ -18,30 +18,43 @@ It´s a free open-source JavaScript library that permite leer, analizar y valida
 Además, esta librería permite acceder a las estadísticas de dichos links.
 
 ## 2. Installing
-### Using npm:
+### Interface:
 
 ```sh
-$ npm install --save md-links-extract-mery
+mdLinks <path-to-file> [options]
 ```
-## 3. Inicialization
-### Using JavaScript API - Import
-
 ### Using CLI (Command Line Interface)
 
 ```sh
-md-links <path-to-file> [options]
+$ npm install --save md-links-mv
 ```
-> Esta es la ruta del archivo o carpeta que deseas procesar, donde:
+
+> IMPORTANTE. En la interfaz, `<path-to-file>` es la ruta de tu archivo Markdown y donde:
  > #### `[options]` 
  > Puede adoptar los siguientes valores:
  > ##### `--validate`
- > Con este valor, el módulo  hace una petición HTTP para averiguar si el link funciona o no. Si el link resulta en una redirección a una URL que responde ok, entonces consideraremos el link como ok.
+ > Con este option, el módulo  hace una petición HTTP para averiguar si el link funciona o no. Si el link resulta en una redirección a una URL que responde ok, entonces consideraremos el link como ok.
  > ##### `--stats` 
- > Con este valor, el output (salida) será un texto con estadísticas básicas sobre los links.
-
+ > Con este option, el output (salida) será un texto con estadísticas básicas sobre los links.
  > ##### `--stats` `--validate`
- > Con la combinación de ambos valores obtendrémos las estadísticas que necesiten de los resultados de la validación.
+ > Con la combinación de ambos valores obtendrás las estadísticas que necesiten de los resultados de la validación.
+ ## 3. Importing
 
+### Interface:
+
+```sh
+mdLinks(path, options)
+```
+### Using Import
+
+```sh
+import mdLinks from 'md-links-mv';
+let mdLinks = require('md-links-mv');
+```
+
+> IMPORTANTE. En la interfaz, `path` es la ruta de tu archivo Markdown y donde:
+ > ##### `options` 
+ > Validará los links encontrados.
 ## 4. Version
 1.0.1
 ## 5. Licence
@@ -49,3 +62,5 @@ Licencia [MIT](https://opensource.org/licenses/MIT) ©️ 2021
 
 ## 6. Action Plan
 [Project mdlinks](https://github.com/meryvera/LIM014-mdlinks/projects/2)
+[Flowchart - API](https://github.com/meryvera/LIM014-mdlinks/blob/main/FLOWCHART-API.md)
+[Flowchart - CLI](https://github.com/meryvera/LIM014-mdlinks/blob/main/FLOWCHART-CLI.md)
