@@ -72,10 +72,14 @@ You can import the module in your scripts:
 import mdLinks from 'md-links-mv';
 const mdLinks = require('md-links-mv');
 ```
+### Using Api
+> You can also use the module´s api in your proyect, using the interface above, where 'path' is your file path and 'options' can take true value if you want to use the api with http states of each link found in markdown files, and false value or null value if you just want to get a list with the details .
 
-> IMPORTANT. You can also use the module´s api in your proyect.
-Example:
+Examples 1:
 ![ExtLink](https://github.com/meryvera/LIM014-mdlinks/blob/main/PruebasLinks/img/api2.png)
+
+Examples 2:
+![ExtLink](https://github.com/meryvera/LIM014-mdlinks/blob/main/PruebasLinks/img/api.png)
 
 ## 5. Version
 1.0.1
