@@ -1,11 +1,12 @@
 #!/usr/bin/env node
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-console */
 /* eslint-disable max-len */
 const chalk = require('chalk');
 const mdlinks = require('./index');
 
 const argumentos = (process.argv);
-
+// console.log(process.argv);
 const newPath = argumentos[2];
 
 if (newPath && !argumentos[3]) {

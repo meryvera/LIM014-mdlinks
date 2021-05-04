@@ -11,6 +11,7 @@ const pathTest = {
   relPathFile404: 'PruebasLinks/dirFail/README404.md',
   relPathFileError: 'PruebasLinks/dirFail/READMERR.md',
   relPathDir: 'PruebasLinks/dir',
+  relPathFileNoExist: 'README55.md',
 };
 const options = {
   validateEmpty: '',
@@ -48,29 +49,29 @@ const objectsArrayStatusFile = [
 
 const objectsArrayPerLinkDir = [
   {
+    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\dir2\\README3.md',
     href: 'https://scotch.io/tutorials/javascript-promises-for-dummies#toc-consuming-promises',
     text: 'Consumo de Promesas.3 Este es un link de más de 50',
-    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\dir2\\README3.md',
   },
   {
+    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\dir2\\README3.md',
     href: 'https://www.freecodecamp.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/',
     text: 'Creación de Promesas.3.2',
-    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\dir2\\README3.md',
   },
   {
+    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\dir2\\README4.md',
     href: 'https://github.com/markdown-it/linkify-it',
     text: 'Linkify4.',
-    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\dir2\\README4.md',
   },
   {
+    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\dir2\\README4.md',
     href: 'https://markdown-it.github.io/linkify-it/',
     text: 'Linkify4.2.',
-    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\dir2\\README4.md',
   },
   {
+    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\README2.md',
     href: 'https://kinsta.com/es/blog/codigos-de-estado-de-http/',
     text: 'Estados',
-    file: 'C:\\Users\\N10\\Desktop\\merylab\\meryLIM014-mdlinks\\PruebasLinks\\dir\\README2.md',
   },
 ];
 // const objectsArrayStatusDir = [
@@ -183,16 +184,18 @@ describe('Testing a markdown file', () => {
   });
   test('Should return an object with status broken link', () => {
     // eslint-disable-next-line prefer-promise-reject-errors
-    axios.get.mockImplementation(() => Promise.reject({}));
+    axios.get.mockImplementation(() => Promise.reject({
+
+    }));
     mdLinks(pathTest.relPathFileError, options.validateTrue).then((data) => {
       expect(data).toEqual(objectsArrayStatusError);
     });
   });
-  test('Should return: ✖ La ruta no existe', () => {
+  test('Should return: La ruta no existe', () => {
     // eslint-disable-next-line prefer-promise-reject-errors
-    axios.get.mockImplementation(() => Promise.reject(''));
-    mdLinks(pathTest.relPathFileNoExist, options.validateTrue).catch((data) => {
-      expect(data).toEqual('✖ La ruta no existe');
+    mdLinks(pathTest.relPathFileNoExist, options.validateTrue).catch((error) => {
+      // console.log('195 ', error);
+      expect(() => { throw new Error(error); }).toThrowError('La ruta no existe');
     });
   });
 });
@@ -202,15 +205,21 @@ describe('Testing a directory', () => {
   it('is a function', () => {
     expect(typeof mdLinks).toBe('function');
   });
-  test('Should return 1 object´s array per each link founded in a Directory', () => mdLinks(pathTest.relPathDir, options.validateFalse).then((data) => {
-    expect(data).toEqual(objectsArrayPerLinkDir);
-  }));
-  // test('Should return 1 object´s array per each link founded in a Directory', () => mdLinks(pathTest.relPathDir, options.validateEmpty).then((data) => {
-  //   expect(data).toEqual(objectsArrayPerLinkDir);
-  // }));
-  // test('Should return 1 object´s array per each link founded in a Directory', () => mdLinks(pathTest.relPathDir).then((data) => {
-  //   expect(data).toEqual(objectsArrayPerLinkDir);
-  // }));
+  test('Should return 1 object´s array per each link founded in a Directory', () => {
+    mdLinks(pathTest.relPathDir, { validate: false }).then((data) => {
+      expect(data).toEqual(objectsArrayPerLinkDir);
+    });
+  });
+  // test('Should return 1 object´s array per each link founded in a Directory', () => {
+  //   mdLinks(pathTest.relPathDir, '').then((data) => {
+  //     expect(data).toEqual(objectsArrayPerLinkDir);
+  //   });
+  // });
+  // test('Should return 1 object´s array per each link founded in a Directory', () => {
+  //   mdLinks(pathTest.relPathDir).then((data) => {
+  //     expect(data).toEqual(objectsArrayPerLinkDir);
+  //   });
+  // });
 
   // test('Should return an object with status 200', () => {
   //   axios.get.mockImplementation(() => Promise.resolve({

@@ -21,9 +21,13 @@ const mdLinks = (filepath, options) => new Promise((resolve, reject) => {
   const absolutePath = convertToAbsolutePathM(filepath);
   const existsPath = pathExistsM(absolutePath); // booleano
 
-  const errorr = '✖ La ruta no existe';
-  const absoluteExists = existsPath ? absolutePath : reject(chalk.bgRed(errorr));
-  // console.log('La ruta es absoluta y esxite L27 ', chalk.green(absoluteExists));
+  let absoluteExists;
+  const errorr = 'La ruta no existe';
+  if (existsPath && absolutePath) {
+    absoluteExists = absolutePath;
+  } else {
+    reject(new Error(errorr));
+  }
 
   const isDirectory = isDirectoryM(absoluteExists)
     ? isDirectoryM(absoluteExists)
@@ -40,21 +44,17 @@ const mdLinks = (filepath, options) => new Promise((resolve, reject) => {
       : chalk.red('No es markdown, ni directorio');
   }
 
+  const arrayDeObjetosLinks = extractLinksArrayM(arrayMarkdownsM); // se extrae 1 array de objetos x cada link
   if (!options || options.validate === false || options === '') {
-    const arrayDeObjetosLinks = extractLinksArrayM(arrayMarkdownsM); // se extrae 1 array de objetos x cada link
     resolve(arrayDeObjetosLinks); // este test si pasa xqe no tiene console.log este return
+  } else {
+    const promiseObjectArray = [];// aca ahora se guarda array de objetos + status
+    arrayDeObjetosLinks.forEach((objeto) => {
+      promiseObjectArray.push(validateStatusM(objeto));
+    });
+    // console.log('linea 62', promiseObjectArray); // Promise {<pending>}, --> 1 x cada link
+    resolve(Promise.all(promiseObjectArray));
   }
-  const arrayDeObjetosLinks = extractLinksArrayM(arrayMarkdownsM);
-
-  const promiseObjectArray = [];// aca ahora se guarda array de objetos + status
-  arrayDeObjetosLinks.forEach((objeto) => {
-    promiseObjectArray.push(validateStatusM(objeto));
-  });
-  // console.log('linea 62', promiseObjectArray); // Promise {<pending>}, --> 1 x cada link
-  const promiseArrayDeObjetosLinksStatus = Promise.all(promiseObjectArray).then(
-    (result) => result,
-  );
-  resolve(promiseArrayDeObjetosLinksStatus);
 });
 
 module.exports = mdLinks;
@@ -71,14 +71,14 @@ module.exports = mdLinks;
 // mdLinks('./PruebasLinks/dir/README2.md', { validate: true }).then((res) => console.log(res))
 //   .catch(console.error); // Milu
 
-// mdLinks('./PruebasLinks/dir/dir2').then((res) => console.log(res))
-// .catch(console.error); // Milu
+// mdLinks('./PruebasLinks/dir/dir2', '').then((res) => console.log(res))
+//   .catch(console.error); // Milu
 // mdLinks('./PruebasLinks/dir/dir2').then((res) => console.log(res))
 // .catch(console.error); // Milu
 // mdLinks('./PruebasLinks/dir/dir2', { validate: true }).then((res) => console.log(res))
 //   .catch(console.error); // Milu
 // mdLinks('./PruebasLinks/dir/dir2', { validate: false }).then((res) => console.log(res))
-// .catch(console.error); // Milu
+//   .catch(console.error); // Milu
 
 // mdLinks('./PruebasLinks/dir', '').then((res) => console.log(res))
 //   .catch(console.error); // Milu

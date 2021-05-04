@@ -7,38 +7,58 @@
 
 * [1. About ExtLink markdown library](#1-about)
 * [2. Installing](#2-installing)
-* [3. Importing](#3-importing)
-* [4. Version](#4-version)
-* [5. Licence](#5-licence)
-* [6. Action Plan](#6-action-plan)
+* [3. Usage](#3-usage)
+* [4. Importing](#4-importing)
+* [5. Version](#5-version)
+* [6. Licence](#6-licence)
+* [7. Action Plan](#7-action-plan)
 
 ## 1. About ExtLink markdown library
-It´s a free open-source JavaScript library that permite leer, analizar y validar links de archivos en formatos `Markdown` (.md), mediante peticiones HTTP (http.get) en node.js.
+ExtLink is a free, open source JavaScript library that allows you to read, parse, and validate links to files in `Markdown` (.md) formats, using HTTP requests (http.get) in node.js.
 
-Además, esta librería permite acceder a las estadísticas de dichos links.
+In addition, this library allows access to the statistics of these links. 
 
 ## 2. Installing
-### Interface:
-
-```sh
-mdLinks <path-to-file> [options]
-```
 ### Using CLI (Command Line Interface)
+You can use this module installing it in your package json as follows in your terminal:
 
 ```sh
-$ npm install --save md-links-mv
+$ npm install --save-dev https://github.com/meryvera/LIM014-mdlinks
 ```
 
-> IMPORTANTE. En la interfaz, `<path-to-file>` es la ruta de tu archivo Markdown y donde:
- > #### `[options]` 
- > Puede adoptar los siguientes valores:
+## 3. Usage
+### Interface:
+You can use this module under the following structure: 
+
+```sh
+mdLinks 'path-to-file' --options
+```
+> IMPORTANT. In the interface, `'path-to-file'` is the path of your Markdown file or folder with markdown files and other files, and where:
+ > #### `--options` 
+ > It can take the following values:
+  > ##### `no options`
+ > Just with a path and without any option, the module will return a list of all links found in all markdown files. This list shows the entered path to be analyzed, the links found in each markdown file and the text of each link.
+ Example:
+ ![ExtLink](https://github.com/meryvera/LIM014-mdlinks/blob/main/PruebasLinks/img/mdl-file.png)
+
  > ##### `--validate`
- > Con este option, el módulo  hace una petición HTTP para averiguar si el link funciona o no. Si el link resulta en una redirección a una URL que responde ok, entonces consideraremos el link como ok.
+ > With this option, the module makes an HTTP request to find out if the link works or not. If the link results in a redirect to a URL that responds ok, then we will treat the link as ok.
+  Example:
+ ![ExtLink](https://github.com/meryvera/LIM014-mdlinks/blob/main/PruebasLinks/img/mdl-file-val.png)
+
  > ##### `--stats` 
- > Con este option, el output (salida) será un texto con estadísticas básicas sobre los links.
+ > With this option, the output will be a text with basic statistics about the links.
+  Example:
+ ![ExtLink](https://github.com/meryvera/LIM014-mdlinks/blob/main/PruebasLinks/img/mdl-file-stat.png)
+
  > ##### `--stats` `--validate`
- > Con la combinación de ambos valores obtendrás las estadísticas que necesiten de los resultados de la validación.
- ## 3. Importing
+ > With the combination of both values you will obtain the statistics that you need from the validation results.
+  Example:
+ ![ExtLink](https://github.com/meryvera/LIM014-mdlinks/blob/main/PruebasLinks/img/mdl-file-val-stat.png)
+
+ > ##### `--help`
+ > With --help option, you can access to the information above in your terminal .
+ ## 4. Importing
 
 ### Interface:
 
@@ -46,21 +66,25 @@ $ npm install --save md-links-mv
 mdLinks(path, options)
 ```
 ### Using Import
+You can import the module in your scripts: 
 
 ```sh
 import mdLinks from 'md-links-mv';
-let mdLinks = require('md-links-mv');
+const mdLinks = require('md-links-mv');
 ```
 
-> IMPORTANTE. En la interfaz, `path` es la ruta de tu archivo Markdown y donde:
- > ##### `options` 
- > Validará los links encontrados.
-## 4. Version
+> IMPORTANT. You can also use the module´s api in your proyect.
+Example:
+![ExtLink](https://github.com/meryvera/LIM014-mdlinks/blob/main/PruebasLinks/img/api2.png)
+
+## 5. Version
 1.0.1
-## 5. Licence
+## 6. Licence
 Licencia [MIT](https://opensource.org/licenses/MIT) ©️ 2021
 
-## 6. Action Plan
+## 7. Action Plan
 [Project mdlinks](https://github.com/meryvera/LIM014-mdlinks/projects/2)
-[Flowchart - API](https://drive.google.com/file/d/1SKuCDFVMw1vOuzCf1TvLZ_FfoCxJhl-_/view?usp=sharing)
-[Flowchart - CLI](https://drive.google.com/file/d/1BfEjCkfMvtAorM_hMQmIFfSw2C153rn8/view?usp=sharing)
+
+[Flowchart-API](https://drive.google.com/file/d/1SKuCDFVMw1vOuzCf1TvLZ_FfoCxJhl-_/view?usp=sharing)
+
+[Flowchart-CLI](https://drive.google.com/file/d/1BfEjCkfMvtAorM_hMQmIFfSw2C153rn8/view?usp=sharing)

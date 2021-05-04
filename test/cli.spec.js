@@ -18,7 +18,7 @@ describe('test de la libreria md-links-mv', () => {
   it('Debería retornar detalle por link sin estado', (done) => execute('mdLinks', [path.join(`${process.cwd()}/PruebasLinks/dir/README2.md`)])
     .then((result) => {
       console.log('linea18 ', (process.cwd()), result); // C:\Users\N10\Desktop\merylab\meryLIM014-mdlinks Analizando file ingresado:
-      console.log('linea19 ', result); //  Analizando file ingresado:
+      console.log('linea19 ', result); // Analizando file ingresado:
       expect(result).toEqual(`${(chalk.magenta('Analizando file ingresado:\n'))}${chalk.green('PruebasLinks/dir/README2.md')} ${(chalk.cyan('https://kinsta.com/es/blog/codigos-de-estado-de-http/'))} ${(chalk.blue('Estados'))}`);
       done();
     }));
